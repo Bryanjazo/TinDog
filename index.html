@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<link rel="stylesheet" href="css/main.css">
+
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+
+<body>
+
+  <div id="dashboard">
+    <div id="userDetails">
+      <button id="logoutBtn" type="button" name="button">Log Out</button>
+    </div>
+  </div>
+
+    <section id="signup-signIn">
+      <section class="left-section">
+        <div id="left-cover" class="cover cover-hide">
+          <img src="img/cover.png" alt="">
+          <h1>Welcome !</h1>
+          <h3>Already have an account ?</h3>
+          <button type="button" class="switch-btn" onclick="location.reload()">Login</button>
+        </div>
+        <div id="left-form" class="form fade-in-element">
+          <h1>Login</h1>
+          <div id="loginScreen">
+            <input id="email" type="text" name="email" class="input-box" placeholder="Email">
+            <input id="password" type="password" name="user-pass" class="input-box" placeholder="Password">
+            <input id="logInUser" type="button" name="login-btn" class="btnSignIn" value="Login">
+          </div>
+        </div>
+      </section>
+
+      <section class="right-section">
+        <div id="right-cover" class="cover fade-in-element">
+          <img src="img/cover.png" alt="">
+          <h1>Welcome !</h1>
+          <h3>Don't have an account ?</h3>
+          <button type="button" class="switch-btn" onclick="switchSignup()">Signup</button>
+        </div>
+
+        <div class="Sign-up">
+          <div id="right-form" class="form form-hide">
+            <h1>Signup</h1>
+            <div class="container">
+              <form class="signup-form">
+              <input id="name" type="text" name="user-name" class="input-box" placeholder="User Name">
+              <input id="emaill" class="email" type="email" name="email" class="input-box" placeholder="Email">
+              <input id="passwordd" class="password" type="password" name="password" class="input-box" placeholder="Password">
+              <input id="btnSignUpO" type="button" name="signup-btn" class="btnSignUp" value="Signup">
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+    </section>
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyBOgQhyipGpLqFolwwtEDQW-OEHf2XhJJc",
+      authDomain: "sugar-babys.firebaseapp.com",
+      projectId: "sugar-babys",
+      storageBucket: "sugar-babys.appspot.com",
+      messagingSenderId: "183681590369",
+      appId: "1:183681590369:web:bc56ab0d0ce5123b2df620",
+      measurementId: "G-T765HD1QCX"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+
+
+  <script type="text/javascript" src="src/index.js"></script>
+
+
+</body>
+
+</html>
