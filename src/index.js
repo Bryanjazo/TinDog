@@ -1,3 +1,8 @@
+// Urls
+const BASE_URL = "http://localhost:3000"
+const USERS_URL = `${BASE_URL}/users`
+
+
 //switch sign up and log in screens
 var left_cover = document.getElementById("left-cover");
 var left_form = document.getElementById("left-form");
@@ -5,7 +10,6 @@ var right_cover = document.getElementById("right-cover");
 var right_form = document.getElementById("right-form");
 
 // Variables for pushing user to databse
-
 function switchSignup() {
   right_form.classList.add("fade-in-element");
   left_cover.classList.add("fade-in-element");
@@ -17,9 +21,34 @@ function switchSignup() {
 // hide Appear Log in and Sign up
 front = document.getElementById('signup-signIn')
 back = document.getElementById('dashboard')
+//sign Up
+const inputFields = document.querySelectorAll(".input-text")
 
 // Log in
+let loggedIn = null
+let signedUp = false
+
 document.getElementById('logInUser').addEventListener('click', logInUser)
+
+
+function fetchUserLogIn(name, uid) {
+  let config = {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      email: email,
+      uid: uid
+    })
+  }
+  fetch('http://localhost:3000/users', config)
+    .then(res => res.json())
+    .then(obj => console.log(obj))
+  displayUserForSwipes()
+}
 
 function logInUser() {
   console.log('call')
@@ -32,8 +61,7 @@ function logInUser() {
 }
 
 function showUserHome(user) {
-  document.getElementById('userDetails').innerHtml = `
-  <P>Logged In Success with ${user.email}`
+  document.getElementById('userDetails').innerHtml = "logged in"
 }
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
@@ -47,58 +75,66 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 // Sign Up
-function createUser(email, uid) {
-  let config = {
-    method: "POST",
+function createUser() {
+  fetch('http://localhost:3000/users',{
+    method: 'POST',
     mode: "no-cors",
-    headers:{
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: "application/json"
     },
     body: JSON.stringify({
-      email: email,
-      uid: uid
+      username: inputFields[0].value,
+      email: inputFields[1].value,
+      password: inputFields[2].value
     })
-  }
-  fetch('http://localhost:3000/users', config)
-    .then(res => res.json())
-    .then(obj => console.log(obj))
+  }).then(response => response.json()).then(data => {
+    if (data === 'success') {
+      displayUserForSwipes();
+    }
+  })
 }
 
-document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
 
-function signUpUser() {
-  let email = document.getElementById('emaill').value
-  let password = document.getElementById('passwordd').value
 
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      createUser(firebase.auth().createUser().email, firebase.auth().createUser().uid)
 
-      // ...
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ..
-    });
-}
+document.getElementById('btnSignUpO').addEventListener('click', createUser)
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    console.log(user)
-  } else {
+// function signUpUser() {
+//   console.log('call')
+//   let email = document.getElementById('emaill').value
+//   let password = document.getElementById('passwordd').value
+//
+//   firebase.auth().createUserWithEmailAndPassword(email, password)
+//     .then((userCredential) => {
+//       // Signed in
+//       var user = userCredential.user;
+//       displayUserForSwipes();
+//       // createUser()
+//
+//       // ...
+//     })
+//     .catch((error) => {
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       // ..
+//     });
+// }
 
-  }
-})
+// firebase.auth().onAuthStateChanged(user => {
+//   if (user) {
+//     console.log(user)
+//   } else {
+//
+//   }
+// })
 
 // Log Out
 document.getElementById('logoutBtn').addEventListener('click', logOutUser)
 
 function logOutUser() {
   firebase.auth().signOut().then(() => {
+    localStorage.clear(loggedIn)
     front.style.display = "block"
     back.style.display = "none"
   }).catch(e => {
