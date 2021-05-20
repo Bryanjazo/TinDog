@@ -6,19 +6,24 @@
   <title></title>
 </head>
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/header.css">
 
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
 
 <body>
-
-  <div id="dashboard">
+<section id="dashboard">
+  <div>
     <div id="userDetails">
-      <button id="logoutBtn" type="button" name="button">Log Out</button>
       <div id="userHome">
 
+        <div id="cardContainer">
+  
+        </div>
       </div>
     </div>
   </div>
+  </section>
 
     <section id="signup-signIn">
       <section class="left-section">
@@ -31,9 +36,13 @@
         <div id="left-form" class="form fade-in-element">
           <h1>Login</h1>
           <div id="loginScreen">
+            <div class="container">
+            <form class="login-form">
             <input id="email" type="text" name="email" class="input-box" placeholder="Email">
-            <input id="password" type="password" name="user-pass" class="input-box" placeholder="Password">
-            <input id="logInUser" type="button" name="login-btn" class="btnSignIn" value="Login">
+            <input id="password" type="password" name="password" class="input-box" placeholder="Password">
+            <input id="logInUser" type="submit" name="login-btn" class="btnSignIn" value="Login">
+            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -43,7 +52,7 @@
           <img src="img/cover.png" alt="">
           <h1>Welcome !</h1>
           <h3>Don't have an account ?</h3>
-          <button type="button" class="switch-btn" onclick="switchSignup()">Signup</button>
+          <button type="button" name="submit" class="switch-btn" onclick="switchSignup()">Signup</button>
         </div>
 
         <div class="Sign-up">
@@ -54,13 +63,13 @@
               <input id="name" type="text" name="user-name" class="input-text" placeholder="User Name">
               <input id="emaill" class="input-text" type="email" name="email" class="input-box" placeholder="Email">
               <input id="passwordd" class="input-text" type="password" name="password" class="input-box" placeholder="Password">
-              <input id="btnSignUpO" type="button" name="signup-btn" class="btnSignUp" value="Signup">
+              <input id="btnSignUpO" type="submit" name="submit" class="btnSignUp" value="Signup">
               </form>
             </div>
           </div>
         </div>
 
-
+h
       </section>
     </section>
 
@@ -84,15 +93,22 @@
       appId: "1:183681590369:web:bc56ab0d0ce5123b2df620",
       measurementId: "G-T765HD1QCX"
     };
+
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
   </script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
 
-
+<script type="text/javascript" src="src/components/header.js"></script>
+  <script src="src/components/profile.js" charset="utf-8"></script>
+  <script src="src/components/frontCards.js" charset="utf-8"></script>
+  <script src="src/components/chat.js" charset="utf-8"></script>
   <script src="src/components/app.js" charset="utf-8"></script>
   <script type="text/javascript" src="src/index.js"></script>
+
+  <script src="https://kit.fontawesome.com/365894dfef.js" crossorigin="anonymous"></script>
+
 
 
 </body>
