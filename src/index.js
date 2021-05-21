@@ -1,42 +1,56 @@
+let buttons = document.getElementsByClassName('button-icon')
+//switch sign up and log in screens
 
+document.addEventListener('DOMContentLoaded',()=>{
+tinDogCards()
+navBard()
 
+})
 // Event listeners
 document.getElementById('logoutBtn').addEventListener('click', logOutUser)
 document.getElementById('logInUser').addEventListener('click', logInUser)
 document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
 let chat = chatPage();
+let Profile = profile();
 
-let buttons = document.getElementsByClassName('button-icon')
+
+
+function navBard(){
 for (let btn of buttons) {
   btn.addEventListener('click', function(e) {
     if (e.target.id == "left-icon") {
       console.log('left')
-
+      profile();
+      cardContainer.style.display = "none"
+      Profile.style.display = 'block'
+      chat.style.display = 'none'
     } else if (e.target.id == "middle-icon") {
       console.log('home')
       tinDogCards();
+      cardContainer.style.display = "block"
+      Profile.style.display = 'none'
       chat.style.display = 'none'
     } else {
       console.log('right')
+      chatPage();
       chat.style.display = 'block'
-
+      Profile.style.display = 'none'
+      cardContainer.style.display = "none"
     }
-
   })
+  }
 }
+
 // Urls
 const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 
-
-//switch sign up and log in screens
 var left_cover = document.getElementById("left-cover");
 var left_form = document.getElementById("left-form");
 var right_cover = document.getElementById("right-cover");
 var right_form = document.getElementById("right-form");
-
 // Variables for pushing user to databse
-function switchSignup() {
+function switchSignup(){
   right_form.classList.add("fade-in-element");
   left_cover.classList.add("fade-in-element");
   left_form.classList.add("form-hide");
@@ -75,6 +89,7 @@ logInForm.addEventListener('submit', function(e) {
     .then(res => res.json())
     .then(function(object) {
       console.log(object)
+      sessionStorage.userID = object.id
       displayUserHome()
     })
 })
@@ -124,7 +139,7 @@ signUpForm.addEventListener('submit', function(e) {
     })
     .then(res => res.json())
     .then(function(object) {
-
+      sessionStorage.userID = object.id
       displayUserHome();
     })
 })
@@ -164,8 +179,10 @@ firebase.auth().onAuthStateChanged(user => {
 
 function logOutUser() {
   firebase.auth().signOut().then(() => {
+    sessionStorage.userID = ""
     front.style.display = "block"
     back.style.display = "none"
+
   }).catch(e => {
     console.log(e)
   })

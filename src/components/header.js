@@ -15,7 +15,7 @@ function header(){
     <i id="right-icon" class="far fa-envelope"></i>
     </button>
     </div>
-    <button id="logoutBtn" type="button" name="button">Log Out</button>
+      <button id="logoutBtn" type="button" name="button">Log Out</button>
     `
   );
 }
