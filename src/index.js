@@ -1,45 +1,86 @@
 let buttons = document.getElementsByClassName('button-icon')
+
 //switch sign up and log in screens
 
 document.addEventListener('DOMContentLoaded',()=>{
 tinDogCards()
+swipeButtons()
+displayUserHome()
 navBard()
+// profile()
+imageAndForm()
+
+
+
 
 })
+
+
 // Event listeners
-document.getElementById('logoutBtn').addEventListener('click', logOutUser)
+
 document.getElementById('logInUser').addEventListener('click', logInUser)
 document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
+// document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
+
 let chat = chatPage();
-let Profile = profile();
+// let Profile = profile();
+let buttonSwipe = swipeButtons();
 
 
 
 function navBard(){
-for (let btn of buttons) {
-  btn.addEventListener('click', function(e) {
-    if (e.target.id == "left-icon") {
+let headerDiv = document.getElementById('headerID')
+buttonSwipe = document.getElementById('swipeButtons')
+document.getElementById('logoutBtn').addEventListener('click', logOutUser)
+  headerDiv.addEventListener('click', function(e){
+    if (e.target.id == "left-icon"){
       console.log('left')
       profile();
+      swipeButtonz.style.display = "none"
       cardContainer.style.display = "none"
-      Profile.style.display = 'block'
+      profileContainer.style.display = 'block'
       chat.style.display = 'none'
-    } else if (e.target.id == "middle-icon") {
+    }else if (e.target.id == "middle-icon") {
       console.log('home')
       tinDogCards();
+      swipeButtonz.style.display = "block"
       cardContainer.style.display = "block"
-      Profile.style.display = 'none'
+      profileContainer.style.display = 'none'
       chat.style.display = 'none'
-    } else {
+    }else if (e.target.id == "right-icon"){
       console.log('right')
       chatPage();
+      swipeButtonz.style.display = "none"
       chat.style.display = 'block'
-      Profile.style.display = 'none'
+      profileContainer.style.display = 'none'
       cardContainer.style.display = "none"
     }
   })
   }
-}
+// for (let btn of buttons) {
+//   btn.addEventListener('click', function(e) {
+//     if (e.target.id == "left-icon") {
+//       console.log('left')
+//       profile();
+//       cardContainer.style.display = "none"
+//       profileContainer.style.display = 'block'
+//       chat.style.display = 'none'
+//     } else if (e.target.id == "middle-icon") {
+//       console.log('home')
+//       tinDogCards();
+//       cardContainer.style.display = "block"
+//       profileContainer.style.display = 'none'
+//       chat.style.display = 'none'
+//     } else {
+//       console.log('right')
+//       chatPage();
+//       chat.style.display = 'block'
+//       profileContainer.style.display = 'none'
+//       cardContainer.style.display = "none"
+//     }
+//   })
+
+
 
 // Urls
 const BASE_URL = "http://localhost:3000"
@@ -89,7 +130,8 @@ logInForm.addEventListener('submit', function(e) {
     .then(res => res.json())
     .then(function(object) {
       console.log(object)
-      sessionStorage.userID = object.id
+      let obj = object
+      sessionStorage.userID = obj.id
       displayUserHome()
     })
 })
@@ -139,7 +181,8 @@ signUpForm.addEventListener('submit', function(e) {
     })
     .then(res => res.json())
     .then(function(object) {
-      sessionStorage.userID = object.id
+      let obj = object
+      sessionStorage.userID = obj.id
       displayUserHome();
     })
 })
@@ -151,7 +194,11 @@ function signUpUser() {
   let email = document.getElementById('emaill').value
   let password = document.getElementById('passwordd').value
 
-  firebase.auth().createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(auth => {
+    firebase.storageBucket().ref('users.' + auth.user.uid + '/profile.jpg').put(file).then(function (){
+      console.log('succesfully uploaded')
+    })
+  })
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
@@ -166,13 +213,43 @@ function signUpUser() {
     });
 }
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    console.log(user)
-  } else {
-
-  }
-})
+// firebase.auth().onAuthStateChanged(user => {
+//   if (user) {
+//     console.log(user)
+//   } else {
+//
+//   }
+// })
+// // adding profile pic
+// imgSrcDisplay = document.getElementById('img')
+// let file = {};
+// function chooseFile(e){
+//  file = e.target.files[0];
+// }
+//
+// function signUpButtonPressed(){
+//   let email = document.getElementById('emaill').value
+//   let password = document.getElementById('passwordd').value
+//   firebase.auth().createUserWithEmailAndPassword(email, password).then(auth => {
+//
+//     firebase.storage().ref('users/' + auth.user.uid + '/profile.jpg').put(file).then(function () {
+//       console.log('success')
+//     })
+//     console.log(auth);
+//   }).catch(e => {
+//     console.log(e)
+//   })
+// }
+//
+// firebase.auth().onAuthStateChanged(user => {
+//   if(user){
+//     firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL().then(imgUrl => {
+//       console.log(imgSrcDisplay.src = imgUrl)
+//       imgSrcDisplay.src = imgUrl
+//
+//     })
+//   }
+// })
 
 // Log Out
 

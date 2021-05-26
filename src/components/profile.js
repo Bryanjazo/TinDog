@@ -1,64 +1,65 @@
+const profileContainer = document.getElementById('profile')
+profileContainer.style.display = "none"
 
-function profile(){
-  let d = document.createElement('h1')
-    d.innerHTML = "test2"
-    userHome.append(d)
-    d.style.display = "none"
-  return d
+
+function profile() {
+  console.log('load1')
+  profileContainer.innerHTML = imageAndForm();
+  sendDataForProfiles()
+
 }
 
-//
-// const PostForm = props => {
-//
-//   const handleSubmit = event => {
-//     event.preventDefault()
-//     const formData = new FormData(event.target)
-//     API.submitPost(formData)
-//       .then(data => props.setPost(data.post))
-//       .catch(console.error);
-//   }
-//
-//   const submitPost = formData => {
-//   const config = {
-//     method: "POST",
-//     headers: {
-//       "Authorization": localStorage.getItem("token"),
-//       "Accept": "application/json"
-//     },
-//     body: formData
-//   }
-//   return fetch('http://localhost:3000/user_profiles', config)
-//     .then(res => res.json());
-// }
-//
-//   return (
-//     `<form onSubmit={handleSubmit}>
-//       <label htmlFor="caption">
-//         Name
-//         <input type="text" name="name" />
-//       </label>
-//       <label htmlFor="image" >
-//         Upload image
-//         <input type="file" name="image" accept="image/*" />
-//       </label>
-//       <label htmlFor="bio">
-//         Name
-//         <input type="text" name="bio" />
-//       </label>
-//       <label htmlFor="age">
-//         Name
-//         <input type="text" name="age" />
-//       </label>
-//       <label htmlFor="gender">
-//         Name
-//         <input type="text" name="gender" />
-//       </label>
-//       <label htmlFor="interest">
-//         Name
-//         <input type="text" name="interest" />
-//       </label>
-//       <input type="submit" value="Submit" />
-//     </form>`
-//   );
-//
-// }
+function imageAndForm() {
+  return (
+    `
+        <form id="homeProfile">
+          <label htmlFor="caption">Name</label>
+          <input class="profileField" type="text" name="name" /><br>
+          <label htmlFor="caption">Image</label>
+          <input class="profileField" type="file" name="image" accept="image/*" /><br>
+          <label htmlFor="caption">Age</label>
+          <input class="profileField" type="text" name="age" /><br>
+          <label htmlFor="caption">Gender</label>
+          <input class="profileField" type="text" name="gender"" /><br>
+          <label htmlFor="caption">interests Cats/Dogs</label>
+          <input class="profileField" type="text" name="interest" /><br>
+          <label htmlFor="caption">Bio</label<br>
+          <input class="profileField" type="text" name="bio"  /><br>
+          <input type="submit" value="submit" />
+        </form>`
+      );
+}
+
+function sendDataForProfiles(){
+let profileField = document.querySelectorAll('.profileField')
+let profileForm = document.getElementById('homeProfile')
+console.log('here')
+
+profileForm.addEventListener('submit', function(e) {
+
+  console.log('here2')
+
+  fetch('http://localhost:3000//users/:user_id/profiles', {
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+      body: JSON.stringify({
+        name: profileField[0].value,
+        avatar: profileField[1].value,
+        age: profileField[2].value,
+        gender: profileField[3].value,
+        interest: profileField[4].value,
+        bio: profileField[5].value,
+        user_id: sessionStorage.userID
+      })
+    })
+    .then(res => res.json())
+    .then(function(object) {
+      console.log(object)
+    }).catch(e => {
+      alert(e)
+    })
+  })
+}

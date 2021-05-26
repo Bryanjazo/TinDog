@@ -1,7 +1,7 @@
 function header(){
 
   return (
-  `<div class="header">
+  `<div id="headerID" class="header">
 
     <button class="button-icon" type="button" name="button">
     <i id="left-icon" class="far fa-user-circle"></i>

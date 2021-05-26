@@ -9,19 +9,39 @@
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/header.css">
 
+
+
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
 
-<body>
+<body id="test">
+
+  <img id="img" src="">
 <section id="dashboard">
   <div>
     <div id="userDetails">
+
       <div id="userHome">
 
       </div>
     </div>
   </div>
-    <div id="test">
+<br>
+
+    <div id="home">
+
     </div>
+    <div id="buttons">
+
+    </div>
+    <div id="profile">
+
+    </div>
+
+
+<style media="screen">
+
+</style>
+
 
   </section>
 
@@ -62,44 +82,36 @@
             <div class="container">
               <form class="signup-form">
               <input id="name" type="text" name="user-name" class="input-text" placeholder="User Name">
-              <input id="emaill" class="input-text" type="email" name="email" class="input-box" placeholder="Email">
-              <input id="passwordd" class="input-text" type="password" name="password" class="input-box" placeholder="Password">
+              <input id="emaill" type="email" name="email" class="input-text" placeholder="Email">
+              <input id="passwordd" type="password" name="password" class="input-text" placeholder="Password">
+              <input type="file" id="photo" onchange="chooseFile(event)">
               <input id="btnSignUpO" type="submit" name="submit" class="btnSignUp" value="Signup">
+              <!-- onClick="signUpButtonPressed()" -->
               </form>
             </div>
           </div>
         </div>
 
-h
+
+
+
       </section>
     </section>
 
-
   <!-- The core Firebase JS SDK is always required and must be listed first -->
+
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
 
-  <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyBOgQhyipGpLqFolwwtEDQW-OEHf2XhJJc",
-      authDomain: "sugar-babys.firebaseapp.com",
-      projectId: "sugar-babys",
-      storageBucket: "sugar-babys.appspot.com",
-      messagingSenderId: "183681590369",
-      appId: "1:183681590369:web:bc56ab0d0ce5123b2df620",
-      measurementId: "G-T765HD1QCX"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-  </script>
+<script src="src/components/firebase.js" charset="utf-8"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
 
 <script type="text/javascript" src="src/components/header.js"></script>
   <script src="src/components/profile.js" charset="utf-8"></script>
@@ -107,7 +119,6 @@ h
   <script src="src/components/chat.js" charset="utf-8"></script>
   <script src="src/components/app.js" charset="utf-8"></script>
   <script type="text/javascript" src="src/index.js"></script>
-
   <script src="https://kit.fontawesome.com/365894dfef.js" crossorigin="anonymous"></script>
 
 
