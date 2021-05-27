@@ -18,6 +18,7 @@ body {
   font-size: 25px;
 
 
+
 }
 
 code {
@@ -26,6 +27,11 @@ code {
 
 }
 
+
+#imageCard{
+  width: 560px;
+  height: 450px;
+}
 
 
 #middle-icon{
@@ -204,6 +210,7 @@ code {
   text-align: center;
 }
 .card {
+
     position: relative;
     width: 600px;
     padding: 20px;
@@ -218,7 +225,7 @@ code {
 .card h3 {
     position: absolute;
     bottom: 10px;
-    color: white;
+    color: black;
 }
 
 .tinderCards__cardContainer {
@@ -228,6 +235,9 @@ code {
 }
 
 /* stacks cards on top of each other */
+.moveContainer{
+  margin-left: 35%;
+}
 .swipe {
     position: absolute;
 }
@@ -236,7 +246,12 @@ code {
   font-size: 5rem;
 }
 /* buttons  */
-
+#homeProfile{
+  text-align: center;
+}
+#upDateHome{
+  text-align: center;
+}
 .swipeButtons {
 
     position: fixed;

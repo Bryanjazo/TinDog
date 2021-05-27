@@ -1,16 +1,13 @@
 let buttons = document.getElementsByClassName('button-icon')
 
+var profiles = []
 //switch sign up and log in screens
 
-document.addEventListener('DOMContentLoaded',()=>{
-tinDogCards()
-swipeButtons()
-displayUserHome()
-navBard()
-// profile()
-imageAndForm()
-
-
+document.addEventListener('DOMContentLoaded', () => {
+  tinDogCards()
+  displayUserHome()
+  swipeButtons()
+  navBard()
 
 
 })
@@ -22,63 +19,146 @@ document.getElementById('logInUser').addEventListener('click', logInUser)
 document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
 // document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
 
-let chat = chatPage();
 // let Profile = profile();
 let buttonSwipe = swipeButtons();
 
 
 
-function navBard(){
-let headerDiv = document.getElementById('headerID')
-buttonSwipe = document.getElementById('swipeButtons')
-document.getElementById('logoutBtn').addEventListener('click', logOutUser)
-  headerDiv.addEventListener('click', function(e){
-    if (e.target.id == "left-icon"){
+function navBard() {
+  let headerDiv = document.getElementById('headerID')
+  document.getElementById('logoutBtn').addEventListener('click', logOutUser)
+  headerDiv.addEventListener('click', function(e) {
+    if (e.target.id == "left-icon") {
       console.log('left')
-      profile();
+      profileHome();
+
+      updateContainer.style.display = "block"
       swipeButtonz.style.display = "none"
       cardContainer.style.display = "none"
       profileContainer.style.display = 'block'
       chat.style.display = 'none'
-    }else if (e.target.id == "middle-icon") {
+    } else if (e.target.id == "middle-icon") {
       console.log('home')
       tinDogCards();
+      updateContainer.style.display = "none"
       swipeButtonz.style.display = "block"
       cardContainer.style.display = "block"
       profileContainer.style.display = 'none'
       chat.style.display = 'none'
-    }else if (e.target.id == "right-icon"){
+    } else if (e.target.id == "right-icon") {
       console.log('right')
-      chatPage();
+      likesContainer();
+      updateContainer.style.display = "none"
       swipeButtonz.style.display = "none"
       chat.style.display = 'block'
       profileContainer.style.display = 'none'
       cardContainer.style.display = "none"
     }
   })
-  }
-// for (let btn of buttons) {
-//   btn.addEventListener('click', function(e) {
-//     if (e.target.id == "left-icon") {
-//       console.log('left')
-//       profile();
-//       cardContainer.style.display = "none"
-//       profileContainer.style.display = 'block'
-//       chat.style.display = 'none'
-//     } else if (e.target.id == "middle-icon") {
-//       console.log('home')
-//       tinDogCards();
-//       cardContainer.style.display = "block"
-//       profileContainer.style.display = 'none'
-//       chat.style.display = 'none'
-//     } else {
-//       console.log('right')
-//       chatPage();
-//       chat.style.display = 'block'
-//       profileContainer.style.display = 'none'
-//       cardContainer.style.display = "none"
-//     }
-//   })
+}
+
+function homeIcons() {
+  // const likeBody = {like: true, user_id: sessionStorage.userID, profile_id: profileId}
+  // const dislike =  {dislike: true, user_id: sessionStorage.userID, profile_id: profileId}
+  // const supper_like = {supper_like: true, user_id: sessionStorage.userID, profile_id: profileId}
+  let nameCard = document.getElementById('name')
+  let imageCard = document.getElementById('imageCard')
+  let counter = 0
+  let homeHeader = document.getElementById('homeIcons')
+  let card = document.getElementById('cardElement')
+  homeHeader.addEventListener('click', function(e) {
+
+    if (e.target.id == "xIcon") {
+      if (counter < profiles.length) {
+        counter += 1
+        let profile = profiles[counter]
+        console.log(profile.name)
+        console.log(profile.image)
+        nameCard.innerText = profile.name
+        imageCard.src = profile.image
+
+        fetch('http://localhost:3000/likes', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+
+              dislike: true,
+              super_like: false,
+              like: false,
+              profile_id: profile.id,
+              user_id: sessionStorage.userID
+            })
+          })
+          .then(res => res.json())
+          .then(function(object) {
+          })
+      } else {
+        alert("no more matches")
+      }
+    } else if (e.target.id == "starIcon") {
+      if (counter < profiles.length) {
+        counter += 1
+        let profile = profiles[counter]
+        console.log(profile.name)
+        console.log(profile.image)
+        nameCard.innerText = profile.name
+        imageCard.src = profile.image
+        fetch('http://localhost:3000/likes', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+
+              super_like: true,
+              like: false,
+              dislike: false,
+              profile_id: profile.id,
+              user_id: sessionStorage.userID
+            })
+          })
+          .then(res => res.json())
+          .then(function(object) {
+          })
+      } else {
+        alert("no more matches")
+      }
+    } else if (e.target.id == "checkIcon") {
+      if (counter < profiles.length) {
+        counter += 1
+        let profile = profiles[counter]
+        console.log(profile.name)
+        console.log(profile.image)
+        nameCard.innerText = profile.name
+        imageCard.src = profile.image
+        fetch('http://localhost:3000/likes', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+
+              like: true,
+              dislike: false,
+              super_like: false,
+              profile_id: profile.id,
+              user_id: sessionStorage.userID
+            })
+          })
+          .then(res => res.json())
+          .then(function(object) {
+          })
+      } else {
+        alert("no more matches")
+      }
+    }
+  })
+}
 
 
 
@@ -91,7 +171,7 @@ var left_form = document.getElementById("left-form");
 var right_cover = document.getElementById("right-cover");
 var right_form = document.getElementById("right-form");
 // Variables for pushing user to databse
-function switchSignup(){
+function switchSignup() {
   right_form.classList.add("fade-in-element");
   left_cover.classList.add("fade-in-element");
   left_form.classList.add("form-hide");
@@ -117,11 +197,11 @@ logInForm.addEventListener('submit', function(e) {
   console.log('here')
 
   fetch('http://localhost:3000/sessions', {
-    method: 'POST',
-    headers:{
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify({
         email: logInFields[0].value,
         password: logInFields[1].value
@@ -129,10 +209,10 @@ logInForm.addEventListener('submit', function(e) {
     })
     .then(res => res.json())
     .then(function(object) {
-      console.log(object)
       let obj = object
       sessionStorage.userID = obj.id
-      displayUserHome()
+      localStorage.profile_id = obj.profile_id
+      console.log(object)
     })
 })
 
@@ -168,11 +248,11 @@ firebase.auth().onAuthStateChanged(user => {
 signUpForm.addEventListener('submit', function(e) {
   e.preventDefault()
   fetch('http://localhost:3000/users', {
-    method: 'POST',
-    headers:{
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify({
         username: inputFields[0].value,
         email: inputFields[1].value,
@@ -182,6 +262,7 @@ signUpForm.addEventListener('submit', function(e) {
     .then(res => res.json())
     .then(function(object) {
       let obj = object
+      localStorage.profile_id = obj.profile_id
       sessionStorage.userID = obj.id
       displayUserHome();
     })
@@ -195,10 +276,10 @@ function signUpUser() {
   let password = document.getElementById('passwordd').value
 
   firebase.auth().createUserWithEmailAndPassword(email, password).then(auth => {
-    firebase.storageBucket().ref('users.' + auth.user.uid + '/profile.jpg').put(file).then(function (){
-      console.log('succesfully uploaded')
+      firebase.storageBucket().ref('users.' + auth.user.uid + '/profile.jpg').put(file).then(function() {
+        console.log('succesfully uploaded')
+      })
     })
-  })
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;

@@ -1,8 +1,26 @@
+const likesContainerLeft = document.getElementById('home')
 
-function chatPage(){
-  let d = document.createElement('h1')
-    d.innerHTML = "test1"
-    userHome.append(d)
-    d.style.display = "none"
-  return d
+
+
+function likesContainer(){
+  const promise = fetch(`http://localhost:3000/users/${sessionStorage.userID}/likes`)
+  promise.then(function(resp) {
+      return resp.json()
+    })
+    .then(function(likesArray) {
+      console.log(likesArray)
+      profiles = likesArray
+      likesContainerLeft.innerHTML = renderAllLikes(likesArray)
+    })
+}
+
+
+function renderAllLikes(likesArray) {
+  return likesArray.map(showLikes).join(' ')
+}
+
+function showLikes(likes){
+  return(
+    ``
+  )
 }

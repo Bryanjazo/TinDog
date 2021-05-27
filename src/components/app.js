@@ -6,6 +6,7 @@ let userHome = document.getElementById('userDetails')
 function displayUserHome() {
   userHome.innerHTML = Home()
   navBard()
+  
 }
 
 function Home() {
