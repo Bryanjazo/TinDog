@@ -3,28 +3,6 @@ const swipeButtonz = document.getElementById('buttons')
 swipeButtonz.style.display = "block"
 cardContainer.style.display = "block"
 
-// const likeBody = {like: true, user_id: sessionStorage.userID, profile_id: shifted_id}
-// const dislike =  {dislike: true, user_id: sessionStorage.userID, profile_id: shifted_id}
-// const supper_like = {supper_like: true, user_id: sessionStorage.userID, profile_id: shifted_id}
-
-
-// fetch('http://localhost:3000/likes'){
-//   method: 'POST',
-//   headers:{
-//     'Content-Type': 'application/json',
-//     Accept: 'application/json',
-//   },
-//     body: JSON.stringify(
-//       likeBody
-//     )
-//   })
-//   .then(res => res.json())
-//   .then(function(array) {
-//     console.log(array)
-//   }).catch(e => {
-//     alert(e)
-//   })
-// }
 function tinDogCards() {
 
   const promise = fetch('http://localhost:3000/profiles')
@@ -43,7 +21,6 @@ function tinDogCards() {
 
 function renderAllUsers(profilesArray) {
   for (let profile of profilesArray){
-
   return cards(profile)
 
 

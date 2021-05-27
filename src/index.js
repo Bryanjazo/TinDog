@@ -31,7 +31,7 @@ function navBard() {
     if (e.target.id == "left-icon") {
       console.log('left')
       profileHome();
-
+      likesContainerLeft.style.display = 'none'
       updateContainer.style.display = "block"
       swipeButtonz.style.display = "none"
       cardContainer.style.display = "none"
@@ -40,6 +40,7 @@ function navBard() {
     } else if (e.target.id == "middle-icon") {
       console.log('home')
       tinDogCards();
+      likesContainerLeft.style.display = 'none'
       updateContainer.style.display = "none"
       swipeButtonz.style.display = "block"
       cardContainer.style.display = "block"
@@ -48,9 +49,9 @@ function navBard() {
     } else if (e.target.id == "right-icon") {
       console.log('right')
       likesContainer();
+      likesContainerLeft.style.display = 'block'
       updateContainer.style.display = "none"
       swipeButtonz.style.display = "none"
-      chat.style.display = 'block'
       profileContainer.style.display = 'none'
       cardContainer.style.display = "none"
     }
