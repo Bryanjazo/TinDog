@@ -2,6 +2,36 @@ const likesContainerLeft = document.getElementById('likesLeft')
 
 likesContainerLeft.style.display = 'none'
 
+buttonOrganizer = document.getElementById('organize')
+
+buttonOrganizer.addEventListener('click', (e) =>{
+
+  const promise = fetch(`http://localhost:3000/users/${sessionStorage.userID}/likes`)
+  promise.then(function(resp) {
+      return resp.json()
+    })
+    .then(function(likesArray) {
+          likesContainerLeft.innerHTML = organizedMethod(likesArray)
+
+
+    })
+})
+
+
+
+function organizedMethod([...likesArray]){
+  console.log("sorted by name:")
+  likesArray.sort((a,b)=>{
+    if(a.name < b.name){
+      return -1
+    }
+    if(a.name > b.name){
+      return 1
+    }
+    return 0
+  })
+  console.log(likesArray)
+}
 function likesContainer(){
   const promise = fetch(`http://localhost:3000/users/${sessionStorage.userID}/likes`)
   promise.then(function(resp) {
@@ -32,3 +62,8 @@ function showLikes(likes){
     </div>
     `)
 }
+
+// "buttonOrganize"
+// find a way to re organize the fetch or the object being passed in
+//conditional maybe
+//
