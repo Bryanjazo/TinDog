@@ -80,7 +80,7 @@ function sendDataForProfiles() {
     e.preventDefault();
     console.log('here2')
 
-    fetch('http://localhost:3000/users/:user_id/profiles', {
+    fetch('https://tindog-backend-bryan.herokuapp.com/users/:user_id/profiles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ function upDateFromPush() {
   updateHome.addEventListener('submit', function(e) {
     console.log('here2')
     e.preventDefault();
-    fetch('http://localhost:3000/users/:user_id/profiles/:id', {
+    fetch('https://tindog-backend-bryan.herokuapp.com/users/:user_id/profiles/:id', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

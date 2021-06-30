@@ -6,7 +6,7 @@ buttonOrganizer = document.getElementById('organize')
 
 buttonOrganizer.addEventListener('click', (e) =>{
 
-  const promise = fetch(`http://localhost:3000/users/${sessionStorage.userID}/likes`)
+  const promise = fetch(`https://tindog-backend-bryan.herokuapp.com/users/${sessionStorage.userID}/likes`)
   promise.then(function(resp) {
       return resp.json()
     })
@@ -51,7 +51,7 @@ function newLikes(likes){
 }
 
 function likesContainer(){
-  const promise = fetch(`http://localhost:3000/users/${sessionStorage.userID}/likes`)
+  const promise = fetch(`https://tindog-backend-bryan.herokuapp.com/users/${sessionStorage.userID}/likes`)
   promise.then(function(resp) {
       return resp.json()
     })

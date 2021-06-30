@@ -5,7 +5,7 @@ cardContainer.style.display = "block"
 
 function tinDogCards() {
 
-  const promise = fetch('http://localhost:3000/profiles')
+  const promise = fetch('https://tindog-backend-bryan.herokuapp.com/profiles')
   promise.then(function(resp) {
       return resp.json()
     })

@@ -78,7 +78,7 @@ function homeIcons() {
         nameCard.innerText = profile.name
         imageCard.src = profile.image
 
-        fetch('http://localhost:3000/likes', {
+        fetch('https://tindog-backend-bryan.herokuapp.com/likes', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ function homeIcons() {
         console.log(profile.image)
         nameCard.innerText = profile.name
         imageCard.src = profile.image
-        fetch('http://localhost:3000/likes', {
+        fetch('https://tindog-backend-bryan.herokuapp.com/likes', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ function homeIcons() {
         console.log(profile.image)
         nameCard.innerText = profile.name
         imageCard.src = profile.image
-        fetch('http://localhost:3000/likes', {
+        fetch('https://tindog-backend-bryan.herokuapp.com/likes', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ function homeIcons() {
 
 
 // Urls
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = "https://tindog-backend-bryan.herokuapp.com"
 const USERS_URL = `${BASE_URL}/users`
 
 var left_cover = document.getElementById("left-cover");
@@ -197,7 +197,7 @@ logInForm.addEventListener('submit', function(e) {
   e.preventDefault()
   console.log('here')
 
-  fetch('http://localhost:3000/sessions', {
+  fetch('https://tindog-backend-bryan.herokuapp.com/sessions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -248,7 +248,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 signUpForm.addEventListener('submit', function(e) {
   e.preventDefault()
-  fetch('http://localhost:3000/users', {
+  fetch('https://tindog-backend-bryan.herokuapp.com/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
