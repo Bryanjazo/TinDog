@@ -14,12 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Event listeners
-
 document.getElementById('logInUser').addEventListener('click', logInUser)
 document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
-// document.getElementById('btnSignUpO').addEventListener('click', signUpUser)
-
-// let Profile = profile();
 let buttonSwipe = swipeButtons();
 
 
@@ -59,9 +55,6 @@ function navBard() {
 }
 
 function homeIcons() {
-  // const likeBody = {like: true, user_id: sessionStorage.userID, profile_id: profileId}
-  // const dislike =  {dislike: true, user_id: sessionStorage.userID, profile_id: profileId}
-  // const supper_like = {supper_like: true, user_id: sessionStorage.userID, profile_id: profileId}
   let nameCard = document.getElementById('name')
   let imageCard = document.getElementById('imageCard')
   let counter = 0
@@ -171,6 +164,7 @@ var left_cover = document.getElementById("left-cover");
 var left_form = document.getElementById("left-form");
 var right_cover = document.getElementById("right-cover");
 var right_form = document.getElementById("right-form");
+
 // Variables for pushing user to databse
 function switchSignup() {
   right_form.classList.add("fade-in-element");
@@ -191,7 +185,7 @@ const inputFields = document.querySelectorAll(".input-text")
 const logInForm = document.querySelector(".login-form")
 const logInFields = document.querySelectorAll(".input-box")
 
-
+// Login Form
 
 logInForm.addEventListener('submit', function(e) {
   e.preventDefault()
@@ -217,7 +211,7 @@ logInForm.addEventListener('submit', function(e) {
     })
 })
 
-
+// Login 
 
 function logInUser() {
   console.log('call')
@@ -244,7 +238,7 @@ firebase.auth().onAuthStateChanged(user => {
     back.style.display = "none"
   }
 })
-// Sign Up
+// Sign Up Form 
 
 signUpForm.addEventListener('submit', function(e) {
   e.preventDefault()
@@ -269,7 +263,7 @@ signUpForm.addEventListener('submit', function(e) {
     })
 })
 
-
+// sign Up 
 
 function signUpUser() {
   console.log('call')
@@ -295,43 +289,45 @@ function signUpUser() {
     });
 }
 
-// firebase.auth().onAuthStateChanged(user => {
-//   if (user) {
-//     console.log(user)
-//   } else {
-//
-//   }
-// })
-// // adding profile pic
-// imgSrcDisplay = document.getElementById('img')
-// let file = {};
-// function chooseFile(e){
-//  file = e.target.files[0];
-// }
-//
-// function signUpButtonPressed(){
-//   let email = document.getElementById('emaill').value
-//   let password = document.getElementById('passwordd').value
-//   firebase.auth().createUserWithEmailAndPassword(email, password).then(auth => {
-//
-//     firebase.storage().ref('users/' + auth.user.uid + '/profile.jpg').put(file).then(function () {
-//       console.log('success')
-//     })
-//     console.log(auth);
-//   }).catch(e => {
-//     console.log(e)
-//   })
-// }
-//
-// firebase.auth().onAuthStateChanged(user => {
-//   if(user){
-//     firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL().then(imgUrl => {
-//       console.log(imgSrcDisplay.src = imgUrl)
-//       imgSrcDisplay.src = imgUrl
-//
-//     })
-//   }
-// })
+// connecting to firebase for user oauth
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    console.log(user)
+  } else {
+
+  }
+})
+// adding profile pic
+imgSrcDisplay = document.getElementById('img')
+let file = {};
+function chooseFile(e){
+ file = e.target.files[0];
+}
+
+function signUpButtonPressed(){
+  let email = document.getElementById('emaill').value
+  let password = document.getElementById('passwordd').value
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(auth => {
+
+    firebase.storage().ref('users/' + auth.user.uid + '/profile.jpg').put(file).then(function () {
+      console.log('success')
+    })
+    console.log(auth);
+  }).catch(e => {
+    console.log(e)
+  })
+}
+
+firebase.auth().onAuthStateChanged(user => {
+  if(user){
+    firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL().then(imgUrl => {
+      console.log(imgSrcDisplay.src = imgUrl)
+      imgSrcDisplay.src = imgUrl
+
+    })
+  }
+})
 
 // Log Out
 
